@@ -1,8 +1,16 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View,  } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
+
 export default function Header(){
+
+    const [isVisible, setIsVisible] = useState(true);
+
+    function handleToggleVisibility(){
+        setIsVisible((prevState) => !prevState);
+    }
+
     return(
         <View>
             <View>
@@ -16,12 +24,15 @@ export default function Header(){
             </View>
 
             <Text style={styles.texto}>Saldo</Text>
-            <Text style={styles.valor}>R$ 334,45</Text>
-            <MaterialIcons style={styles.view}
-                name="visibility-off"
+            <Text style={styles.valor}>R$ {isVisible ? '334,45' : '-----'} </Text>
+
+           
+            <MaterialIcons style={styles.view} onPress={handleToggleVisibility}
+                name={isVisible ? "visibility-off" : "visibility"}
                 size={28}
                 color="#AAA"
             />
+            
             
         </View>
     )
@@ -58,7 +69,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 0,
         alignSelf: 'center',
-        paddingTop: 130,
+        paddingTop: 135,
         paddingRight: 30,
         
 
